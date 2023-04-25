@@ -7,16 +7,29 @@ public class Rational {
     private int denominator;
 
     // constructors
+    // Write a constructor that takes no arguments, and sets the numerator and denominator to a random integer between -100 and 100, 
+    // excluding 0 for the denominator
     public Rational() {
-        numerator = 0;
-        denominator = 1;
+        numerator = (int) (Math.random() * 201) - 100;
+        denominator = (int) (Math.random() * 201) - 100;
+        // warning for if this constructor is called with a denominator of 0
+        while (denominator == 0) {
+            System.out.println("Warning: denominator cannot be 0");
+            denominator = (int) (Math.random() * 201) - 100;
+        }
     }
 
     // Write a second constructor that takes two arguments
     public Rational(int numerator, int denominator) {
+        // warning for if this constructor is called with a denominator of 0
+        if (denominator == 0) {
+            System.out.println("Warning: denominator cannot be 0");
+            System.exit(0);
+        }
         this.numerator = numerator;
         this.denominator = denominator;
     }
+
 
     // toString
     public String toString() {
@@ -43,7 +56,6 @@ public class Rational {
     }
 
     // use the Euclidean algorithm to find the greatest common divisor of the numerator and denominator
-    // the return type is int because the method returns an integer value
     public int gcd() {
         int a = numerator;
         int b = denominator;
